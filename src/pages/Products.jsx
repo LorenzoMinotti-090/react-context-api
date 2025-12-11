@@ -1,11 +1,14 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
+import { useBudget } from "../context/BudgetContext";
+
 
 export default function Products() {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const { budgetMode } = useBudget();
 
   useEffect(() => {
     async function loadProducts() {
@@ -26,12 +29,17 @@ export default function Products() {
   if (loading) return <h2>Caricamento...</h2>;
   if (error) return <h2>Errore: {error}</h2>;
 
+    const visibleProducts = budgetMode
+    ? products.filter((p) => p.price <= 30)
+    : products;
+
+
   return (
     <section>
       <h1 className="mb-4">Prodotti</h1>
 
       <div className="row row-cols-1 row-cols-md-3 g-4">
-        {products.map((product) => (
+        {visibleProducts.map((product) => (
           <div className="col" key={product.id}>
             <Link
               to={`/prodotti/${product.id}`}

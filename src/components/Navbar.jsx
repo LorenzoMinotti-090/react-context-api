@@ -47,7 +47,7 @@ export default function Navbar() {
                         className="btn btn-warning ms-3"
                         onClick={() => setBudgetMode(!budgetMode)}
                     >
-                        {budgetMode ? "Disattiva Modalità Budget" : "Attiva Modalità Budget"}
+                        {budgetMode ? "Disattiva Budget" : "Attiva Budget"}
                     </button>
 
                 </div>
