@@ -1,4 +1,6 @@
 import { NavLink } from "react-router-dom";
+import { useBudget } from "../context/BudgetContext";
+
 
 const links = [
     { name: "Home", path: "/" },
@@ -7,6 +9,8 @@ const links = [
 ];
 
 export default function Navbar() {
+    const { budgetMode, setBudgetMode } = useBudget();
+
     return (
         <nav className="navbar navbar-expand-lg navbar-blur">
             <div className="container">
@@ -39,6 +43,13 @@ export default function Navbar() {
                             </li>
                         ))}
                     </ul>
+                    <button
+                        className="btn btn-warning ms-3"
+                        onClick={() => setBudgetMode(!budgetMode)}
+                    >
+                        {budgetMode ? "Disattiva Modalità Budget" : "Attiva Modalità Budget"}
+                    </button>
+
                 </div>
             </div>
         </nav>
